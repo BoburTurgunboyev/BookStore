@@ -12,7 +12,8 @@ namespace BookStore.Application.Services.BookServices
         public ValueTask<bool> CreateBook(Book book);
         public ValueTask<Book> UpdateBook(int id, Book book);
         public ValueTask<bool> DeleteBook(int id);
-        public ValueTask<Book> GetByNameBook(string name);
+        public ValueTask<List<Book>> GetByNameBook(string name);
+        public ValueTask<Book> GetByIdBook(int id);
         public ValueTask<List<Book>> GetAllBook();
 
     }

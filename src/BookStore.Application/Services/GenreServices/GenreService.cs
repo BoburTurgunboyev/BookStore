@@ -26,6 +26,11 @@ namespace BookStore.Application.Services.GenreServices
             return await _dbContext.Genres.Include(g => g.Books).ToListAsync();
         }
 
+        public async ValueTask<Genre> GetByIdGenre(int id)
+        {
+            return await _dbContext.Genres.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
         public async ValueTask<Genre> GetByNameGenre(string name)
         {
             return await _dbContext.Genres

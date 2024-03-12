@@ -11,6 +11,7 @@ namespace BookStore.Application.Services.GenreServices
     {
         public ValueTask<bool> CreateGenre(Genre genre);
         public ValueTask<Genre> GetByNameGenre(string name);
+        public ValueTask<Genre> GetByIdGenre(int id);
         public ValueTask<List<Genre>> GetAllGenre();
     
     }

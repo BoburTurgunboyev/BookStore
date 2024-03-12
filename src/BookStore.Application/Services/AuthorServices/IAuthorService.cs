@@ -14,5 +14,6 @@ namespace BookStore.Application.Services.AuthorServices
         public ValueTask<bool> DeleteAuthor(int id);
         public ValueTask<Author> GetByNameAuthor(string fullname);
         public ValueTask<List<Author>> GetAllAuthor();
+        public ValueTask<Author> GetByIdAuthor(int id);
     }
 }

@@ -20,7 +20,11 @@ namespace BookStore.Application.Services.AuthorServices
 
         public async ValueTask<bool> CreateAuthor(Author author)
         {
-            await _dbContext.Authors.AddAsync(author);
+            var auth = new Author()
+            {
+                FullName = author.FullName
+            };
+            await _dbContext.Authors.AddAsync(auth);
             var result = await _dbContext.SaveChangesAsync();
             return result > 0;
         }
@@ -39,6 +43,11 @@ namespace BookStore.Application.Services.AuthorServices
         public async ValueTask<List<Author>> GetAllAuthor()
         {
             return await _dbContext.Authors.ToListAsync();
+        }
+
+        public async ValueTask<Author> GetByIdAuthor(int id)
+        {
+            return await _dbContext.Authors.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async ValueTask<Author> GetByNameAuthor(string name)

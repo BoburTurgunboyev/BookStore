@@ -38,14 +38,25 @@ namespace BookStore.Application.Services.BookServices
 
         public async ValueTask<List<Book>> GetAllBook()
         {
-            var books = await _dbcontext.Books.ToListAsync();
+            var books = await _dbcontext.Books.Include(x=>x.Genre).Include(x=>x.Author).ToListAsync();
             return books;
         }
 
-        public async ValueTask<Book> GetByNameBook(string name)
+        public async ValueTask<Book> GetByIdBook(int id)
         {
-            var book = await _dbcontext.Books.FirstOrDefaultAsync(x=>x.Name==name);
+            var book = await _dbcontext.Books.Include(x=>x.Genre).Include(x=>x.Author).FirstOrDefaultAsync(x=>x.Id == id);
             return book;
+        }
+
+        public async ValueTask<List<Book>> GetByNameBook(string name)
+        {
+            var books = await _dbcontext.Books
+                .Include(x => x.Genre).Include(x => x.Author)
+                .Where(x => x.Name.Contains(name) 
+                    || x.Author.FullName.Contains(name) 
+                    || x.Genre.Name.Contains(name))
+                .ToListAsync();
+            return books;
         }
 
         public async ValueTask<Book> UpdateBook(int id, Book book)

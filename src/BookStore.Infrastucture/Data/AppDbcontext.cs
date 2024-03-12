@@ -1,13 +1,15 @@
 ﻿using BookStore.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Infrastructure.Data
 {
-    public class AppDbcontext : DbContext
+    public class AppDbcontext : IdentityDbContext<User, Role, Guid>
     {
         public AppDbcontext(DbContextOptions<AppDbcontext> options) : base(options)
         {
-            Database.Migrate();
+           
         }
 
         public DbSet<Author> Authors { get; set; }
